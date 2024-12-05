@@ -55,6 +55,13 @@ luxury-rp-loading-screen/
 ├── assets/
 │   ├── css/              # Stylesheets
 │   │   └── style.css
+│   │   └── all.min.css
+│   │   └── fonts.css
+│   ├── fonts/             
+│   │   └── Poppins
+│   │   └── Poppins-Medium
+│   │   └── Poppins-Regular
+│   │   └── Poppins-SemiBold
 │   ├── media/            # Media assets (video, images, audio)
 │   │   ├── icons/        # Social icons and cursor image
 │   │   ├── cover/        # Song covers
@@ -62,6 +69,7 @@ luxury-rp-loading-screen/
 │   │   └── video/        # Background videos
 │   ├── scripts/          # JS files
 │       ├── main.js       # Main functionality
+│       └── config.js     # Config configuration
 │       └── particles.json # Particles.js configuration
 ├── index.html            # Main HTML file
 └── README.md             # Repository documentation
