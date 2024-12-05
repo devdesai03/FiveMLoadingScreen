@@ -1,0 +1,333 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: radial-gradient(circle, #6a0dad 40%, #3b0068 100%);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    cursor: none; /* Hide the default cursor */
+}
+
+/* Custom Cursor */
+#custom-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    pointer-events: none; /* Ensure the cursor doesn't block clicks */
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    display: none; /* Hidden initially */
+}
+
+/* Background Video */
+.background-video video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.5);
+}
+
+/* Particle Effect */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Content Container */
+.content-container {
+    text-align: center;
+    z-index: 1;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Logo */
+.logo-container .logo {
+    width: 425px;
+    margin: 0 auto 20px;
+    position: relative;
+    top: 50px;
+    animation: fade-in 2s ease-in-out; /* Smooth fade-in effect */
+}
+
+/* Welcome Message */
+.welcome-message {
+    position: relative;
+    top: 140px;
+    margin-bottom: 30px;
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.welcome-message h5 {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.5;
+    animation: fade-in-up 1.5s ease-in-out;
+}
+
+.welcome-message span {
+    color: #6a0dad;
+    font-weight: bold;
+}
+
+/* Music Player */
+.music-player {
+    position: relative;
+    top: 150px;
+    margin: 20px auto;
+    background: rgba(32, 0, 64, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    border: 1px solid #6a0dad;
+    animation: fade-in-up 2s ease-in-out;
+}
+
+.song-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.song-info .song-cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    margin-right: 15px;
+    border: 2px solid #6a0dad;
+    transition: transform 0.3s;
+}
+
+.song-info .song-cover:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #6a0dad;
+}
+
+.song-info .details {
+    flex-grow: 1;
+    position: relative;
+}
+
+.song-title {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #9751c9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.song-artist {
+    font-size: 1rem;
+    margin: 5px 0 0;
+    color: #ddd;
+}
+
+/* Audio Toggle */
+.audio-toggle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.audio-toggle .form-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #555;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+}
+
+.audio-toggle .form-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.audio-toggle .form-switch i {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: #6a0dad;
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+}
+
+.audio-toggle .form-switch input:checked + i {
+    transform: translateX(20px);
+    background-color: #f8f8f8;
+}
+
+.audio-toggle .toggle-text {
+    font-size: 0.8rem;
+    color: #ddd;
+    user-select: none;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.controls button:hover {
+    transform: scale(1.2);
+    color: #9751c9;
+}
+
+.controls .volume-slider {
+    flex-grow: 1;
+    margin-left: 10px;
+    appearance: none;
+    background: #555;
+    border-radius: 5px;
+    height: 8px;
+}
+
+.controls .volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #9751c9;
+    cursor: pointer;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.social-links a {
+    position: relative;
+    display: inline-block;
+}
+
+.social-links a img {
+    width: 50px;
+    margin: 0 15px;
+    transition: transform 0.3s, filter 0.3s;
+    filter: brightness(0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.social-links a img:hover {
+    transform: scale(1.2);
+    filter: brightness(1);
+}
+
+/* Tooltip for Social Links */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: #6a0dad;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .logo-container .logo {
+        width: 200px;
+    }
+
+    .welcome-message h5 {
+        font-size: 0.9rem;
+    }
+
+    .music-player {
+        width: 95%;
+        top: 130px;
+    }
+
+    .song-info .song-cover {
+        width: 50px;
+        height: 50px;
+    }
+
+    .controls button {
+        font-size: 1.2rem;
+    }
+
+    .social-links a img {
+        width: 40px;
+    }
+}
