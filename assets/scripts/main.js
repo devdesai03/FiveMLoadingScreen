@@ -8,7 +8,8 @@ $(document).ready(function () {
     const $customCursor = $("#custom-cursor");
     const audioToggle = $("#audio-toggle");
     const toggleText = $(".toggle-text");
-    // You can have as many songs as you want. 
+
+    // Playlist
     const songs = [
         {
             title: "Banned From Boston",
@@ -50,28 +51,32 @@ $(document).ready(function () {
     const $volumeSlider = $("#volume-slider");
 
     let isMuted = false; // Track mute state
+    let isInitialized = false; // Track if audio/video initialized
 
-    // Ensure audio/video starts only after user interaction
+    // Initialize audio/video playback only after interaction
     $(document).on("click", function () {
-        audio.play();
-        $videoElement[0].play();
+        if (!isInitialized) {
+            isInitialized = true;
+            audio.play();
+            $videoElement[0].play();
+        }
     });
 
-    // Update player
+    // Update player UI and media
     function updatePlayer() {
         const song = songs[currentSongIndex];
 
-        // Update UI
+        // Update UI details
         $songTitle.text(song.title);
         $songArtist.text(song.artist);
         $songCover.attr("src", song.cover);
 
-        // Update audio
+        // Update audio source
         audio.src = song.audio;
         audio.volume = isMuted ? 0 : parseFloat($volumeSlider.val()) / 100;
         audio.play();
 
-        // Update video
+        // Update video source
         $videoElement.attr("src", song.video);
         $videoElement[0].play();
 
@@ -81,13 +86,13 @@ $(document).ready(function () {
 
     // Play/Pause functionality
     $playPauseButton.on("click", function () {
-        if (audio.paused) {
-            audio.play();
+        if ($videoElement[0].paused || audio.paused) {
             $videoElement[0].play();
+            audio.play();
             $(this).text("⏸");
         } else {
-            audio.pause();
             $videoElement[0].pause();
+            audio.pause();
             $(this).text("▶");
         }
     });
@@ -117,10 +122,10 @@ $(document).ready(function () {
         toggleText.text(isMuted ? "Unmute" : "Mute");
     });
 
-    // Initialize player
+    // Initialize player with the first song
     updatePlayer();
 
-    // Custom Cursor
+    // Custom Cursor Behavior
     $(document).on("mousemove", function (e) {
         $customCursor.css({
             display: "block",
