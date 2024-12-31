@@ -4,60 +4,56 @@ $(document).ready(function () {
         console.log('Particles.js loaded.');
     });
 
-    // Audio & Video Elements
+
+    // Custom Cursor
     const $customCursor = $("#custom-cursor");
-    const audioToggle = $("#audio-toggle");
-    const toggleText = $(".toggle-text");
 
     // Playlist
     const songs = [
         {
-            title: "Banned From Boston",
-            artist: "Jay 5ive x Jay Hound",
-            cover: "assets/media/cover/song1.png",
-            audio: "assets/media/songs/song_1.mp3",
-            video: "assets/media/video/video_1.mp4"
+            title: "DM",
+            artist: "41",
+            cover: "https://files.catbox.moe/ysrvmr.jpg",
+            video: "https://files.catbox.moe/6rvjed.mp4"
         },
         {
-            title: "50 Bars, Pt. 4",
-            artist: "Rah Swish",
-            cover: "assets/media/cover/song2.png",
-            audio: "assets/media/songs/song_2.mp3",
-            video: "assets/media/video/video_1.mp4"
+            title: "Yes Freestyle",
+            artist: "Sleepy Hallow - ft. Sheff G",
+            cover: "https://files.catbox.moe/j0vbgh.jpg",
+            video: "https://files.catbox.moe/5ipzx0.mp4"
         },
         {
-            title: "Solo",
-            artist: "Future",
-            cover: "assets/media/cover/song3.png",
-            audio: "assets/media/songs/song_3.mp3",
-            video: "assets/media/video/video_1.mp4"
+            title: "TGIF",
+            artist: "GloRilla",
+            cover: "https://files.catbox.moe/tobqkg.png",
+            video: "https://files.catbox.moe/2afmpw.mp4"
         },
         {
-            title: "Keep It P Pt.2",
-            artist: "EthoSuave",
-            cover: "assets/media/cover/song4.jpg",
-            audio: "assets/media/songs/song_4.mp3",
-            video: "assets/media/video/video_1.mp4"
+            title: "Opp Huntin",
+            artist: "Kenzo Balla",
+            cover: "https://files.catbox.moe/rc7et2.jpg",
+            video: "https://files.catbox.moe/gx8gir.mp4"
         }
     ];
 
     let currentSongIndex = 0;
-    const audio = new Audio();
+    
+    const $videoElement = $("#bg-video");
     const $songTitle = $(".song-title");
     const $songArtist = $(".song-artist");
     const $songCover = $(".song-cover");
-    const $videoElement = $("#bg-video");
     const $playPauseButton = $("#play-pause");
     const $volumeSlider = $("#volume-slider");
+    const $progressBar = $("#progress-bar");
+    const $currentTime = $("#current-time");
+    const $duration = $("#duration");
 
-    let isMuted = false; // Track mute state
-    let isInitialized = false; // Track if audio/video initialized
+    let isInitialized = false; // Track if video initialized
 
-    // Initialize audio/video playback only after interaction
+    // Initialize video playback only after interaction
     $(document).on("click", function () {
         if (!isInitialized) {
             isInitialized = true;
-            audio.play();
             $videoElement[0].play();
         }
     });
@@ -65,63 +61,58 @@ $(document).ready(function () {
     // Update player UI and media
     function updatePlayer() {
         const song = songs[currentSongIndex];
-
-        // Update UI details
         $songTitle.text(song.title);
         $songArtist.text(song.artist);
         $songCover.attr("src", song.cover);
-
-        // Update audio source
-        audio.src = song.audio;
-        audio.volume = isMuted ? 0 : parseFloat($volumeSlider.val()) / 100;
-        audio.play();
-
-        // Update video source
         $videoElement.attr("src", song.video);
+        $videoElement[0].load();
         $videoElement[0].play();
-
-        // Update play/pause button
         $playPauseButton.text("⏸");
     }
-
-    // Play/Pause functionality
+    
     $playPauseButton.on("click", function () {
-        if ($videoElement[0].paused || audio.paused) {
+        if ($videoElement[0].paused) {
             $videoElement[0].play();
-            audio.play();
-            $(this).text("⏸");
-        } else {
+            $(this).text("❚❚");
+        } else { 
             $videoElement[0].pause();
-            audio.pause();
             $(this).text("▶");
         }
     });
-
-    // Next Song functionality
-    $("#next-song").on("click", function () {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
-        updatePlayer();
-    });
-
-    // Previous Song functionality
+    
     $("#prev-song").on("click", function () {
         currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
         updatePlayer();
     });
-
-    // Volume Control
+    
+    $("#next-song").on("click", function () {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        updatePlayer();
+    });
+    
     $volumeSlider.on("input", function () {
-        const volume = $(this).val() / 100;
-        if (!isMuted) audio.volume = volume;
+        $videoElement[0].volume = $(this).val() / 100;
     });
-
-    // Mute/Unmute Toggle
-    audioToggle.on("change", function () {
-        isMuted = !$(this).is(":checked");
-        audio.volume = isMuted ? 0 : parseFloat($volumeSlider.val()) / 100;
-        toggleText.text(isMuted ? "Unmute" : "Mute");
+    
+    $videoElement.on("timeupdate", function () {
+        const currentTime = $videoElement[0].currentTime;
+        const duration = $videoElement[0].duration;
+        $progressBar.val((currentTime / duration) * 100);
+        $currentTime.text(formatTime(currentTime));
+        $duration.text(formatTime(duration));
     });
-
+    
+    $progressBar.on("input", function () {
+        const duration = $videoElement[0].duration;
+        $videoElement[0].currentTime = ($(this).val() / 100) * duration;
+    });
+    
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+    }
+    
     // Initialize player with the first song
     updatePlayer();
 
@@ -131,10 +122,25 @@ $(document).ready(function () {
             display: "block",
             top: e.pageY + "px",
             left: e.pageX + "px",
+            opacity: 1,
+            transition: "opacity 0.3s ease, transform 0.3s ease",
         });
     }).on("mouseleave", function () {
-        $customCursor.css("display", "none");
-    }).on("mouseenter", function () {
-        $customCursor.css("display", "block");
+        $customCursor.css({
+            opacity: 0,
+            transition: "opacity 0.3s ease",
+        });
+    });
+
+    // Keyboard Navigation
+    $(document).on("keydown", function (e) {
+        if (e.key === " ") { // Spacebar for play/pause
+            e.preventDefault();
+            $playPauseButton.trigger("click");
+        } else if (e.key === "ArrowRight") { // Right arrow for next song
+            $("#next-song").trigger("click");
+        } else if (e.key === "ArrowLeft") { // Left arrow for previous song
+            $("#prev-song").trigger("click");
+        }
     });
 });

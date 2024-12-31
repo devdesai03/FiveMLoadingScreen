@@ -25,6 +25,7 @@ Welcome to the **Luxury RP Loading Screen**, a modern and interactive loading sc
 ### Prerequisites
 - A web server or FiveM server to serve the files.
 - Basic knowledge of hosting a web-based interface.
+- Create a catbox of your choice of music videos and song covers (saves space). 
 
 ### Installation Steps
 1. Clone the repository to your server:
@@ -33,16 +34,14 @@ Welcome to the **Luxury RP Loading Screen**, a modern and interactive loading sc
    ```
 2. Upload the repository contents to your desired directory.
 3. Update the **particles.json** file (if necessary) to customize the particle effects.
-4. Replace **assets/media/video/video_1.mp4** with your preferred video for the background.
-5. Update song files in the **assets/media/songs** directory and their metadata in main.js:
+
   ```
 const songs = [
     {
         title: "Your Song Title",
         artist: "Your Song Artist",
-        cover: "assets/media/cover/your-song-cover.png",
-        audio: "assets/media/songs/your-song.mp3",
-        video: "assets/media/video/your-background.mp4"
+        cover: "https://files.catbox.moe/your-song-cover.png",
+        video: "https://files.catbox.moe/your-background.mp4"
     }
 ];
   ```
@@ -64,9 +63,6 @@ luxury-rp-loading-screen/
 │   │   └── Poppins-SemiBold
 │   ├── media/            # Media assets (video, images, audio)
 │   │   ├── icons/        # Social icons and cursor image
-│   │   ├── cover/        # Song covers
-│   │   ├── songs/        # Audio files
-│   │   └── video/        # Background videos
 │   ├── scripts/          # JS files
 │       ├── main.js       # Main functionality
 │       └── config.js     # Config configuration
@@ -88,17 +84,16 @@ luxury-rp-loading-screen/
 ## 🎶 Adding Songs
 To add new songs:
 
-1. Upload your audio files to the **assets/media/songs** folder.
-2. Add the cover image to the **assets/media/cover** folder.
+1. Upload your music video to https://catbox.moe/.
+2. Upload your song cover to https://catbox.moe/.
 3. Update the **songs** array in **main.js**:
 ```
 const songs = [
     {
-        title: "New Song Title",
-        artist: "New Song Artist",
-        cover: "assets/media/cover/new-cover.png",
-        audio: "assets/media/songs/new-song.mp3",
-        video: "assets/media/video/new-video.mp4"
+        title: "Your Song Title",
+        artist: "Your Song Artist",
+        cover: "https://files.catbox.moe/your-song-cover.png",
+        video: "https://files.catbox.moe/your-background.mp4"
     }
 ];
 ```
@@ -106,9 +101,6 @@ const songs = [
 ---
 
 ## 🌟 Customization
-
-- **Video Background**
-  - Replace the **video_1.mp4** file in **assets/media/video** with your preferred MP4 video.
 
 - **Cursor**
   - Replace the **cursor.png** file in **assets/media/icons** with your custom cursor design.

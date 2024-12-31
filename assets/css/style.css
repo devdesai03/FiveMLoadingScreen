@@ -1,7 +1,12 @@
+@import "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap";
+
+
 /* General Styles */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family:'Monaco', monospace;
     background: radial-gradient(circle, #6a0dad 40%, #3b0068 100%);
     color: #fff;
     display: flex;
@@ -20,6 +25,7 @@ body {
     pointer-events: none; /* Ensure the cursor doesn't block clicks */
     z-index: 1000;
     transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     display: none; /* Hidden initially */
 }
 
@@ -32,7 +38,18 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    filter: brightness(0.5);
+    filter: brightness(0.7) contrast(1.1);
+}
+
+.background-video::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
 }
 
 /* Particle Effect */
@@ -90,135 +107,163 @@ body {
     position: relative;
     top: 150px;
     margin: 20px auto;
+    display: flex;
+    flex-direction: column;
     background: rgba(32, 0, 64, 0.8);
     padding: 20px;
     border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
+    width: 800px;
+    max-width: 1000px;
+    height: 80px; 
     text-align: left;
+    color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     border: 1px solid #6a0dad;
     animation: fade-in-up 2s ease-in-out;
+    gap: 15px;
 }
+
+/* Song Row */
+.song-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Push elements to fill the row */
+    gap: 150px;
+}
+
+/* Song Info */
 
 .song-info {
     display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+    align-items: center; /* Center song cover and details vertically */
+    gap: 12px; /* Add space between song cover and details */
+    flex-grow: 1; /* Allow song info to take up more space */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (...) to overflowing text */
 }
 
-.song-info .song-cover {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    margin-right: 15px;
-    border: 2px solid #6a0dad;
-    transition: transform 0.3s;
+.song-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    border: 3px solid #6a0dad;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.song-info .song-cover:hover {
+.song-cover:hover {
     transform: scale(1.1);
     box-shadow: 0 0 15px #6a0dad;
 }
 
-.song-info .details {
-    flex-grow: 1;
-    position: relative;
-}
-
 .song-title {
-    font-size: 1.4rem;
+    font-size: 1rem;
+    font-weight: bold;
     margin: 0;
     color: #9751c9;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (…) for overflowing text */
 }
 
 .song-artist {
-    font-size: 1rem;
-    margin: 5px 0 0;
-    color: #ddd;
+    font-size: 0.7rem;
+    margin: 0;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (…) for overflowing text */
 }
 
-/* Audio Toggle */
-.audio-toggle {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+/* Controls Row */
+.controls-row {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 185px;
+    flex-shrink: 0; /* Prevent resizing */
+    justify-content: space-between; /* Keep playback controls and volume slider spaced */
 }
-
-.audio-toggle .form-switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-    background-color: #555;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.4s ease;
-}
-
-.audio-toggle .form-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.audio-toggle .form-switch i {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    background-color: #6a0dad;
-    border-radius: 50%;
-    transition: transform 0.4s ease;
-}
-
-.audio-toggle .form-switch input:checked + i {
-    transform: translateX(20px);
-    background-color: #f8f8f8;
-}
-
-.audio-toggle .toggle-text {
-    font-size: 0.8rem;
-    color: #ddd;
-    user-select: none;
-}
-
-/* Controls */
-.controls {
+/* Playback Controls */
+.play-controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px; /* Space between control buttons */
 }
 
-.controls button {
+.play-controls button {
     background: none;
     border: none;
     color: #fff;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: transform 0.2s ease, color 0.3s ease;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.controls button:hover {
-    transform: scale(1.2);
-    color: #9751c9;
+.play-controls button:hover {
+    background-color: rgba(151, 81, 201, 0.3);
+    box-shadow: 0 2px 8px rgba(151, 81, 201, 0.5);
 }
 
-.controls .volume-slider {
-    flex-grow: 1;
-    margin-left: 10px;
+/* Volume Controls */
+.volume-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0; /* Prevent resizing */
+}
+
+.volume-slider {
+    width: 120px; /* Set the width of the volume slider */
     appearance: none;
     background: #555;
+    height: 5px;
     border-radius: 5px;
-    height: 8px;
 }
 
-.controls .volume-slider::-webkit-slider-thumb {
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #9751c9;
+    cursor: pointer;
+}
+
+/* Volume Controls */
+.volume-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between the volume icon and slider */
+}
+
+.volume-icon {
+    width: 20px; /* Adjust the size of the volume icon */
+    height: 20px;
+    display: inline-block;
+    object-fit: contain; /* Ensure the image scales proportionally */
+}
+
+/* Progress Bar Section */
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align time and progress bar on the edges */
+    gap: 10px;
+    flex-shrink: 0; /* Prevent resizing */
+    width: 100%; /* Ensure consistent size */
+}
+
+.progress-bar {
+    flex-grow: 1;
+    appearance: none;
+    background: #555;
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+    flex-shrink: 0;
+}
+
+.progress-bar::-webkit-slider-thumb {
     appearance: none;
     width: 12px;
     height: 12px;
@@ -249,8 +294,9 @@ body {
 }
 
 .social-links a img:hover {
-    transform: scale(1.2);
+    transform: scale(1.2) rotate(5deg);
     filter: brightness(1);
+    box-shadow: 0 4px 15px rgba(106, 13, 173, 0.8);
 }
 
 /* Tooltip for Social Links */
