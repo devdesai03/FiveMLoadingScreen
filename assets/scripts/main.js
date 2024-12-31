@@ -148,4 +148,22 @@ $(document).ready(function () {
             $("#prev-song").trigger("click");
         }
     });
-});
+
+    const $uiElements = $(".content-container"); // Select the UI elements to hide
+        const $eyeIcon = $(".eye-icon");
+    
+        let isUiHidden = false; // Track whether the UI is hidden
+    
+        $(".ui-toggle").on("click", function () {
+            isUiHidden = !isUiHidden;
+    
+            if (isUiHidden) {
+                $uiElements.fadeOut(); // Hide UI elements
+                $eyeIcon.addClass("hidden"); // Add the 'hidden' class for rotation and opacity
+            } else {
+                $uiElements.fadeIn(); // Show UI elements
+                $eyeIcon.removeClass("hidden"); // Remove the 'hidden' class
+            }
+        });
+    });
+    
