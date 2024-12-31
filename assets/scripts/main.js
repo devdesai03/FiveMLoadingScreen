@@ -102,6 +102,11 @@ $(document).ready(function () {
         $duration.text(formatTime(duration));
     });
     
+    $videoElement.on("ended", function () {
+        currentSongIndex = (currentSongIndex + 1) % songs.length; // Move to the next song in the playlist
+        updatePlayer(); // Update the player to the next song
+    });
+    
     $progressBar.on("input", function () {
         const duration = $videoElement[0].duration;
         $videoElement[0].currentTime = ($(this).val() / 100) * duration;
