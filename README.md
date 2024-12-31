@@ -9,7 +9,7 @@ Welcome to the **Luxury RP Loading Screen**, a modern and interactive loading sc
 - **Custom Background Video**: A luxurious video background to captivate players while loading.
 - **Dynamic Music Player**:
   - Playlist functionality with play, pause, next, and previous buttons.
-  - Volume slider with increments of 10%.
+  - Volume slider with increments of 5%.
   - Mute/unmute functionality persisting across song changes.
 - **Particles Animation**: Beautiful and interactive particles powered by Particles.js.
 - **Custom Cursor**: A visually appealing cursor to match the luxury theme.
