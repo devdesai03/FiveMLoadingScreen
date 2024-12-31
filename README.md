@@ -54,14 +54,13 @@ luxury-rp-loading-screen/
 ├── assets/
 │   ├── css/              # Stylesheets
 │   │   └── style.css
-│   │   └── all.min.css
 │   │   └── fonts.css
 │   ├── fonts/             
 │   │   └── Poppins
 │   │   └── Poppins-Medium
 │   │   └── Poppins-Regular
 │   │   └── Poppins-SemiBold
-│   ├── media/            # Media assets (video, images, audio)
+│   ├── media/            # Media assets
 │   │   ├── icons/        # Social icons and cursor image
 │   ├── scripts/          # JS files
 │       ├── main.js       # Main functionality
